@@ -1,17 +1,20 @@
 (function () {
 	'use strict';
-	let cards = document.getElementsByClassName('card');
-	let modal = document.getElementById('modal');
-	let opcoes = document.getElementById('opcoes');
-	let dificuldade = document.getElementById('dificuldade');
-	let facil = document.getElementById('facil');
-	let medio = document.getElementById('medio');
-	let dificil = document.getElementById('dificil');
-	let fim = document.getElementById('fim');
-	let iniciar = document.getElementById('iniciar');
-	let reiniciar = document.getElementById('reiniciar');
-	let msgs = document.getElementById('msgs');
-	let sameCard = document.getElementById('sameCard');
+
+	const elementsHtml = {
+		cards:document.getElementsByClassName('card'),
+		modal:document.getElementById('modal'),
+		opcoes: document.getElementById('opcoes'),
+		dificuldade: document.getElementById('dificuldade'),
+		facil: document.getElementById('facil'),
+		medio: document.getElementById('medio'),
+		dificil: document.getElementById('dificil'),
+		fim: document.getElementById('fim'),
+		iniciar: document.getElementById('iniciar'),
+		reiniciar: document.getElementById('reiniciar'),
+		msgs: document.getElementById('msgs'),
+		sameCard:document.getElementById('sameCard'),
+	}
 
 	let pontos = 0;
 	let cardsSelected = [undefined, undefined];
@@ -24,13 +27,13 @@
 		'f.svg'
 	];
 
-	facil.addEventListener('click', easy);
+	elementsHtml.facil.addEventListener('click', easy);
 
-	reiniciar.addEventListener('click', reiniciarJogo);
+	elementsHtml.reiniciar.addEventListener('click', reiniciarJogo);
 
-	iniciar.addEventListener('click', reiniciarJogo);
+	elementsHtml.iniciar.addEventListener('click', reiniciarJogo);
 
-	msgs.addEventListener('click', hideMsgs);
+	elementsHtml.msgs.addEventListener('click', hideMsgs);
 
 	function returnDifferentsRandomNumbers(minNumber, maxNumber) {
 		var temp = Math.floor(Math.random() * (maxNumber - minNumber) + minNumber);
@@ -46,31 +49,31 @@
 	};
 
 	async function populatingCards() {
-		var temp = returnDifferentsRandomNumbers(0, cards.length);
-		for (var i = 0; i < cards.length; i += 2) {
-			cards[temp[i]].style.backgroundImage = "url(\"./images/" + images[0] + "\")";
-			cards[temp[i]].style.backgroundSize = '0%';
-			cards[temp[i]].style.backgroundRepeat = 'no-repeat';
-			cards[temp[i]].style.backgroundPosition = 'center';
-			cards[temp[i + 1]].style.backgroundImage = "url(\"./images/" + images[0] + "\")";
-			cards[temp[i + 1]].style.backgroundSize = '0%';
-			cards[temp[i + 1]].style.backgroundRepeat = 'no-repeat';
-			cards[temp[i + 1]].style.backgroundPosition = 'center';
+		var temp = returnDifferentsRandomNumbers(0, elementsHtml.cards.length);
+		for (var i = 0; i < elementsHtml.cards.length; i += 2) {
+			elementsHtml.cards[temp[i]].style.backgroundImage = "url(\"./images/" + images[0] + "\")";
+			elementsHtml.cards[temp[i]].style.backgroundSize = '0%';
+			elementsHtml.cards[temp[i]].style.backgroundRepeat = 'no-repeat';
+			elementsHtml.cards[temp[i]].style.backgroundPosition = 'center';
+			elementsHtml.cards[temp[i + 1]].style.backgroundImage = "url(\"./images/" + images[0] + "\")";
+			elementsHtml.cards[temp[i + 1]].style.backgroundSize = '0%';
+			elementsHtml.cards[temp[i + 1]].style.backgroundRepeat = 'no-repeat';
+			elementsHtml.cards[temp[i + 1]].style.backgroundPosition = 'center';
 			images.shift();
-			cards[i].addEventListener('click', yourChance);
-			cards[i].setAttribute('id', "card-" + i);
-			cards[i + 1].addEventListener('click', yourChance);
-			cards[i + 1].setAttribute('id', "card-" + (i + 1));
+			elementsHtml.cards[i].addEventListener('click', yourChance);
+			elementsHtml.cards[i].setAttribute('id', "card-" + i);
+			elementsHtml.cards[i + 1].addEventListener('click', yourChance);
+			elementsHtml.cards[i + 1].setAttribute('id', "card-" + (i + 1));
 		};
 	};
 
 	function hideModal() {
-		modal.style.width = '0%';
-		modal.style.height = '0%';
+		elementsHtml.modal.style.width = '0%';
+		elementsHtml.modal.style.height = '0%';
 	}
 	function showModal() {
-		modal.style.width = '100%';
-		modal.style.height = '100%';
+		elementsHtml.modal.style.width = '100%';
+		elementsHtml.modal.style.height = '100%';
 	}
 
 	function getCardSelected(elementId) {
@@ -126,14 +129,14 @@
 
 	function theEnd() {
 		showModal();
-		opcoes.style.display = 'flex';
-		fim.style.display = 'flex';
+		elementsHtml.opcoes.style.display = 'flex';
+		elementsHtml.fim.style.display = 'flex';
 	};
 
 	function easy() {
 		populatingCards();
-		dificuldade.style.display = 'none';
-		opcoes.style.display = 'none';
+		elementsHtml.dificuldade.style.display = 'none';
+		elementsHtml.opcoes.style.display = 'none';
 	};
 
 	function reiniciarJogo() {
@@ -142,10 +145,10 @@
 
 	function sameClick() {
 		if (cardsSelected[0] === cardsSelected[1]) {
-			modal.style.zIndex = 99;
+			elementsHtml.modal.style.zIndex = 99;
 			showModal();
-			msgs.style.display = 'flex';
-			sameCard.style.display = 'flex';
+			elementsHtml.msgs.style.display = 'flex';
+			elementsHtml.sameCard.style.display = 'flex';
 		}
 		else{
 			cardsSelected[1].style.backgroundSize = '80%';
@@ -154,10 +157,10 @@
 	}
 
 	function hideMsgs(){
-		modal.style.zIndex = 97;
+		elementsHtml.modal.style.zIndex = 97;
 		hideModal();
-		msgs.style.display = 'none';
-		sameCard.style.display = 'none';
+		elementsHtml.msgs.style.display = 'none';
+		elementsHtml.sameCard.style.display = 'none';
 	}
 
 })();
