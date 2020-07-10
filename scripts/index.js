@@ -10,6 +10,8 @@
 	let fim = document.getElementById('fim');
 	let iniciar = document.getElementById('iniciar');
 	let reiniciar = document.getElementById('reiniciar');
+	let msgs = document.getElementById('msgs');
+	let sameCard = document.getElementById('sameCard');
 
 	let pontos = 0;
 	let cardsSelected = [undefined, undefined];
@@ -27,6 +29,8 @@
 	reiniciar.addEventListener('click', reiniciarJogo);
 
 	iniciar.addEventListener('click', reiniciarJogo);
+
+	msgs.addEventListener('click', hideMsgs);
 
 	function returnDifferentsRandomNumbers(minNumber, maxNumber) {
 		var temp = Math.floor(Math.random() * (maxNumber - minNumber) + minNumber);
@@ -77,15 +81,7 @@
 		else {
 			showModal();
 			cardsSelected[1] = document.getElementById(elementId);
-			if (cardsSelected[0] === cardsSelected[1]) {
-				cardsSelected[1] = undefined;
-				hideModal();
-				alert('Selecione outro card');
-			}
-			else{
-				cardsSelected[1].style.backgroundSize = '80%';
-				setTimeout(imagesEquals, 1000);
-			}
+			sameClick()
 		}
 	};
 
@@ -146,8 +142,22 @@
 
 	function sameClick() {
 		if (cardsSelected[0] === cardsSelected[1]) {
-			alert('Selecione outro card')
+			modal.style.zIndex = 99;
+			showModal();
+			msgs.style.display = 'flex';
+			sameCard.style.display = 'flex';
 		}
+		else{
+			cardsSelected[1].style.backgroundSize = '80%';
+			setTimeout(imagesEquals, 1000);
+		}
+	}
+
+	function hideMsgs(){
+		modal.style.zIndex = 97;
+		hideModal();
+		msgs.style.display = 'none';
+		sameCard.style.display = 'none';
 	}
 
 })();
