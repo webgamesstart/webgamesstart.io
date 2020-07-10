@@ -1,0 +1,38 @@
+@font-face {
+    font-family: "Arial";
+    src: url(../resources/fonts/arial.ttf);
+}
+
+body
+{
+	color: black;
+    margin: 0; /*no inherit*/
+    padding: 0; /*no inherit*/
+    border: none; /*no inherit*/
+    box-sizing: border-box;
+    background-color: transparent; /*no inherit*/
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6, p, strong, small, em,
+del, input, button, form, div, pre, img, figcaption,
+ figure, span, a, section, ul, label, header, main
+{
+    position: static;
+    float: none;
+    display: block;
+    box-sizing: border-box;
+    color: black;
+    background-color:transparent;
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+strong, small, em, a{
+    display: inline;
+}
+
+pre{
+    font: normal normal;
+}
