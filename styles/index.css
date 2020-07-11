@@ -4,6 +4,9 @@
     --sizeHPanels:50%;
     --heightHeader:10%;
     --heightMain:90%; 
+    --widthBoard:40%; 
+    --heighBoard:90%;
+    --gridGapCards:5px;
 }
 /* ---------------------------------------- */
 #msgs,
@@ -15,6 +18,7 @@
 #options,
 #theEnd,
 #main,
+#main h3,
 #board,
 #easy,
 #normal,
@@ -24,6 +28,7 @@
 }
 /* ---------------------------------------- */
 #msgs{
+    /* display: block; */
     z-index: 100;
     position: absolute;
     padding: 5% 0;
@@ -38,6 +43,7 @@
 
 /* ---------------------------------------- */
 #protection{
+    /* display: block; */
     z-index: 98;
     position: absolute;
     background-color: transparent;
@@ -60,6 +66,7 @@
 /* ---------------------------------------- */
 
 #splash{
+    /* display: block; */
     z-index: 99;
     position: absolute;
     width: var(--sizeSplash);
@@ -75,6 +82,7 @@
 /* ---------------------------------------- */
 
 #header{
+    /* display: block; */
     height:var(--heightHeader);
     width: 100%;
     background-color: steelblue;
@@ -82,14 +90,29 @@
 }
 
 #main{
+    /* display: flex; */
     height:var(--heightMain);
     background-color: tomato;
     width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#main h3{
+    cursor: pointer;
+}
+
+#main h3:hover{
+    text-align: center;
+    width: 100%;
+    background-color: rgb(255, 255, 0);
 }
 
 /* ---------------------------------------- */
 
 #panels{
+    /* display: flex; */
     z-index: 97;
     position: absolute;
     justify-content: center;
@@ -103,6 +126,7 @@
 /* ---------------------------------------- */
 
 #options{
+    /* display: block; */
     text-align: center;
 }
 
@@ -124,6 +148,33 @@
 
 #levelHard:hover{
     background-color: rgb(255, 0, 0);
+}
+
+/* ---------------------------------------- */
+
+#board{
+    /* display: block; */
+    border: 1px solid rgb(0,0,0);
+    padding: 5px;
+    width:var(--widthBoard);
+    height:var(--heighBoard);
+}
+
+/* ---------------------------------------- */
+
+#easy{
+    /* display: grid; */
+    width: 100%;
+    height: 100%;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr; 
+    grid-gap:var(--gridGapCards);
+}
+
+#easy .card{
+     border: 1px solid rgb(13, 105, 13);
+     width: 100%;
+     height: 100%;
 }
 
 /* ---------------------------------------- */

@@ -14,16 +14,18 @@
         levelNormal: document.getElementById('levelNormal'),
         levelHard: document.getElementById('levelHard'),
         theEnd: document.getElementById('theEnd'),
-        iniciar: document.getElementById('iniciar'),
-        reiniciar: document.getElementById('reiniciar'),
+        start: document.getElementById('start'),
+        restart: document.getElementById('restart'),
         main: document.getElementById('main'),
         board: document.getElementById('board'),
-        boardEasy: document.querySelector('#board #easy'),
-        boardNormal: document.querySelector('#board #normal'),
-        boardHard: document.querySelector('#board #hard')
+        easy: document.querySelector('#board #easy'),
+        normal: document.querySelector('#board #normal'),
+        hard: document.querySelector('#board #hard'),
+        leave: document.querySelector('#main h3')
     };
     let splashVisible = false;
     let points = 0;
+    let playingLevel = '';
     let pointsLevel = {
         easy: 0,
         normal: 0,
@@ -34,6 +36,11 @@
 
     elementsHtml.splash.addEventListener('click', hideSplash);
 
+    elementsHtml.levelEasy.addEventListener('click', playEasy);
+
+
+    elementsHtml.leave.addEventListener('click', resetGame);
+
     // 	elementsHtml.facil.addEventListener('click', easy);
 
     // 	elementsHtml.reiniciar.addEventListener('click', reiniciarJogo);
@@ -41,6 +48,31 @@
     // 	elementsHtml.iniciar.addEventListener('click', reiniciarJogo);
 
     // 	elementsHtml.msgs.addEventListener('click', hideMsgs);
+
+    function fetchImages(level) {
+        let path = `url(./images/${level}/)`;
+        switch (level) {
+            case easy:
+                for (let i = 0; i < 12; i++) {
+
+                }
+                break;
+            case normal:
+                for (let i = 0; i < 24; i++) {
+
+                }
+                break;
+            case hard:
+                for (let i = 0; i < 36; i++) {
+
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+
 
     // 	function returnDifferentsRandomNumbers(minNumber, maxNumber) {
     // 		var temp = Math.floor(Math.random() * (maxNumber - minNumber) + minNumber);
@@ -170,6 +202,52 @@
     // 		elementsHtml.sameCard.style.display = 'none';
     // 	}
 
+    function showPanels(panel){
+        elementsHtml.panels.style.display = 'flex';
+        panel.style.display = 'block';
+
+    }
+
+    function hidePanels(panel){
+        elementsHtml.panels.style.display = 'none';
+        panel.style.display = 'none';
+    }
+    
+    function showBoard(level){
+        elementsHtml.leave.style.display = 'block';
+        elementsHtml.board.style.display = 'block';
+        level.style.display = 'grid';
+
+    }
+
+    function hideBoard(level){
+        elementsHtml.leave.style.display = 'none';
+        elementsHtml.board.style.display = 'none';
+        level.style.display = 'none';
+    }
+
+    function resetGame(){
+        playingLevel = '';
+        points = 0;
+        pointsLevel.easy = 0;
+        pointsLevel.normal = 0;
+        pointsLevel.hard = 0;
+        elementsHtml.leave.style.display = 'none';
+        elementsHtml.board.style.display = 'none';
+        elementsHtml.easy.style.display = 'none';
+        elementsHtml.normal.style.display = 'none';
+        elementsHtml.hard.style.display = 'none';
+        cardsSelected = [undefined, undefined];
+        imagesCards = [];
+        showPanels(elementsHtml.options);
+    }
+
+    function playEasy(){
+        playingLevel = 'easy';
+        hidePanels(elementsHtml.options);
+        showBoard(elementsHtml.easy);
+    };
+
     function hideProtection() {
         elementsHtml.protection.style.display = 'none';
     }
@@ -185,10 +263,9 @@
     function hideSplash() {
         elementsHtml.splash.style.display = 'none';
         splashVisible = false;
-        elementsHtml.panels.style.display = 'flex';
-        elementsHtml.options.style.display = 'block';
+        showPanels(elementsHtml.options);
         elementsHtml.header.style.display = 'block';
-        elementsHtml.main.style.display = 'block';
+        elementsHtml.main.style.display = 'flex';
     };
 
     function showMessage(msg){
@@ -213,6 +290,8 @@
     }
     
 showSplash();
+
+
    
 
 })();
