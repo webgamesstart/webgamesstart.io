@@ -1,144 +1,65 @@
-#game{
-    background-color: #c55ba5;
-    min-width: 340px;
-    min-height: 500px;
-    width: 100vw;
-    height: 100vh;
+:root{
+    --sizeSplash: 80%; 
 }
 
-header{
-    background-color: #fff;
-    width: 100%;
-    height: 10%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-main{
-    width: 100%;
-    height: 90%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#tabuleiro{
-    padding: 3px;
-    border:2px solid #000;
-    width: 100%;
-    height: 90%;
-}
-
-.easy{
-    max-width: 30%;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr;  
-}
-
-.card{
-    width: 100%;
-    height: 100%;
-	  border: 1px solid #f00;
-}
-
-#opcoes{
-  position: absolute;
-  background-color: #b8a5b2;
-  border: 2px solid red;
-  width: 300px;
-  height: 200px;
-  left: calc(50% - (150px));
-  top: calc(50% - (100px));
-  z-index: 98;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-#dificuldade{
-  /* display: none; */
-  text-align: center;
-  cursor: pointer;
-}
-
-#dificuldade h2:hover{
- background-color: #f3e8f0;
-}
-
-#dificuldade #medio{
-  margin: 5% 0;
-}
-
-#fim{
-  display: flex;
-  display: none;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-}
-
-#fim img{
-  width: 40%;
-  height: 50%;
-  cursor: pointer;
-}
-
-#fim img:hover{
-  background-color: #f3e8f0;
-}
-
-#modal{
-    position: absolute;
-    width: 0;
-    height:0;
-    z-index: 97;
+#msgs,
+#game,
+#protection,
+#splash,
+#header,
+#panels,
+#options,
+#theEnd,
+#main,
+#board,
+#easy,
+#normal,
+#hard
+{
+    display: none;
 }
 
 #msgs{
-    position: absolute;
-    width: 100%;
-    height:80px;
-    background-color: rgb(255,0,0);
-    top: calc(50% - (40px));
     z-index: 100;
-    display: none;
+    position: absolute;
+    padding: 5% 0;
+    background-color: rgba(255, 0, 0, 0.7);
+    width: 100%;
+    text-align: center;
+}
+
+#msgs h1{
+    margin-bottom: 5px;
+}
+
+#protection{
+    z-index: 98;
+    background-color: transparent;
+    width: 100%;
+    height: 100%;
+}
+
+#game{
+    z-index: 96;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    width: 100vw;
+    height: 100vh;
+
 }
 
-#msgs #sameCard{
-  display: none;
+#splash{
+    z-index: 99;
+    position: absolute;
+    width: var(--sizeSplash);
+    height: var(--sizeSplash);
+    cursor: pointer;
 }
 
-@media (max-width: 1200px) {
-  .easy {
-    max-width: 40%;
-  }
-}
-
-@media (max-width: 1000px) {
-  .easy {
-    max-width: 50%;
-  }
-}
-
-@media (max-width: 850px) {
-  .easy {
-    max-width: 60%;
-  }
-}
-
-@media (max-width: 650px) {
-  .easy {
-    max-width: 70%;
-  }
-}
-
-@media (max-width: 550px) {
-  .easy {
-    max-width: 80%;
-  }
+#splash img{
+    width: 100%;
+    height: 100%;
 }
