@@ -185,6 +185,9 @@
     function hideSplash() {
         elementsHtml.splash.style.display = 'none';
         splashVisible = false;
+        elementsHtml.panels.style.display = 'flex';
+        elementsHtml.options.style.display = 'block';
+        elementsHtml.header.style.display = 'block';
     };
 
     function showMessage(msg){
@@ -208,7 +211,7 @@
         }
     }
     
-showSplash();
+//showSplash();
    
 
 })();

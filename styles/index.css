@@ -1,5 +1,9 @@
 :root{
     --sizeSplash: 80%; 
+    --sizeWPanels:50%; 
+    --sizeHPanels:50%;
+    --heightHeader:10%;
+    --heightMain:90%; 
 }
 
 #msgs,
@@ -34,6 +38,7 @@
 
 #protection{
     z-index: 98;
+    position: absolute;
     background-color: transparent;
     width: 100%;
     height: 100%;
@@ -50,7 +55,6 @@
     height: 100vh;
 
 }
-
 #splash{
     z-index: 99;
     position: absolute;
@@ -62,4 +66,50 @@
 #splash img{
     width: 100%;
     height: 100%;
+}
+
+/* ---------------------------------------- */
+
+#header{
+    height:var(--heightHeader);
+    display: block; 
+    width: 100%;
+    background-color: steelblue;
+    text-align: center;
+}
+
+#main{
+    display: block; 
+    height:var(--heightMain);
+    background-color: tomato;
+    width: 100%;
+}
+
+/* ---------------------------------------- */
+
+#panels{
+    z-index: 97;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    width: var(--sizeWPanels);
+    height: var(--sizeHPanels);
+    background-color: rgb(18, 119, 69);
+    border: 2px solid #000000;
+}
+
+#options{
+    text-align: center;
+}
+
+#levelNormal{
+    margin: 5% 0;
+}
+
+/* ---------------------------------------- */
+
+@media (max-width: 370px) {
+    :root{
+        --sizeWPanels:80%; 
+    }
 }
