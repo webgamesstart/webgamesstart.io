@@ -188,6 +188,7 @@
         elementsHtml.panels.style.display = 'flex';
         elementsHtml.options.style.display = 'block';
         elementsHtml.header.style.display = 'block';
+        elementsHtml.main.style.display = 'block';
     };
 
     function showMessage(msg){
@@ -211,7 +212,7 @@
         }
     }
     
-//showSplash();
+showSplash();
    
 
 })();

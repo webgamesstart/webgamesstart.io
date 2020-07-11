@@ -5,7 +5,7 @@
     --heightHeader:10%;
     --heightMain:90%; 
 }
-
+/* ---------------------------------------- */
 #msgs,
 #game,
 #protection,
@@ -22,7 +22,7 @@
 {
     display: none;
 }
-
+/* ---------------------------------------- */
 #msgs{
     z-index: 100;
     position: absolute;
@@ -36,6 +36,7 @@
     margin-bottom: 5px;
 }
 
+/* ---------------------------------------- */
 #protection{
     z-index: 98;
     position: absolute;
@@ -44,6 +45,7 @@
     height: 100%;
 }
 
+/* ---------------------------------------- */
 #game{
     z-index: 96;
     display: flex;
@@ -55,6 +57,8 @@
     height: 100vh;
 
 }
+/* ---------------------------------------- */
+
 #splash{
     z-index: 99;
     position: absolute;
@@ -72,14 +76,12 @@
 
 #header{
     height:var(--heightHeader);
-    display: block; 
     width: 100%;
     background-color: steelblue;
     text-align: center;
 }
 
 #main{
-    display: block; 
     height:var(--heightMain);
     background-color: tomato;
     width: 100%;
@@ -94,16 +96,34 @@
     align-items: center;
     width: var(--sizeWPanels);
     height: var(--sizeHPanels);
-    background-color: rgb(18, 119, 69);
+    background-color: rgb(85, 105, 194);
     border: 2px solid #000000;
 }
+
+/* ---------------------------------------- */
 
 #options{
     text-align: center;
 }
 
+#options h2{
+    cursor: pointer;
+}
+
+#levelEasy:hover{
+    background-color: rgb(48, 236, 64);
+}
+
 #levelNormal{
     margin: 5% 0;
+}
+
+#levelNormal:hover{
+    background-color: rgb(255, 255, 0);
+}
+
+#levelHard:hover{
+    background-color: rgb(255, 0, 0);
 }
 
 /* ---------------------------------------- */
