@@ -7,6 +7,9 @@
     --widthBoard:40%; 
     --heighBoard:90%;
     --gridGapCards:5px;
+
+    --widthBoardHard:80%; 
+    --heighBoardHard:90%;
 }
 /* ---------------------------------------- */
 #msgs,
@@ -156,8 +159,8 @@
     /* display: block; */
     border: 1px solid rgb(0,0,0);
     padding: 5px;
-    width:var(--widthBoard);
-    height:var(--heighBoard);
+    width:40%;
+    height:90%;
 }
 
 /* ---------------------------------------- */
@@ -173,14 +176,61 @@
 
 #easy .card{
      border: 1px solid rgb(13, 105, 13);
+     background-color: #fff;
      width: 100%;
      height: 100%;
 }
 
 /* ---------------------------------------- */
 
-@media (max-width: 370px) {
-    :root{
-        --sizeWPanels:80%; 
-    }
+/* ---------------------------------------- */
+
+#normal{
+    /* display: grid; */
+    width: 100%;
+    height: 100%;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr; 
+    grid-gap:var(--gridGapCards);
 }
+
+#normal .card{
+     border: 1px solid rgb(244, 248, 6);
+     background-color: #fff;
+     width: 100%;
+     height: 100%;
+}
+
+/* ---------------------------------------- */
+
+/* ---------------------------------------- */
+
+#hard{
+    /* display: grid; */
+    width: 100%;
+    height: 100%;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr; 
+    grid-gap:var(--gridGapCards);
+}
+
+#hard .card{
+     border: 1px solid rgb(244, 0, 0);
+     background-color: #fff;
+     width: 100%;
+     height: 100%;
+}
+
+/* ---------------------------------------- */
+
+
+
+
+
+
+@media (max-width: 370px) {
+    #board{
+        width:80%;
+        height:80%;
+    }
+};
