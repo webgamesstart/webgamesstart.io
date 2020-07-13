@@ -29,9 +29,11 @@
     let splashVisible = false;
     let points = 0;
     let playingLevel = '';
+    let elementsPlayingLevel = '';
     let pointsLevel = 0;
     let cardsSelected = [undefined, undefined];
     let imagesCards = [];
+    let copyImagesCards = [];
 
     elementsHtml.splash.addEventListener('click', hideSplash);
 
@@ -45,9 +47,7 @@
 
     elementsHtml.start.addEventListener('click', resetGame);
     
-    //elementsHtml.restart.addEventListener('click', resetGame);
-
-    // 	elementsHtml.msgs.addEventListener('click', hideMsgs);
+    elementsHtml.restart.addEventListener('click', resetLevel);
 
     async function fetchImages(level) {
         let path = `url(./images/${level}/`;
@@ -71,6 +71,7 @@
                 showMessage('Error in path images', 3000);
                 break;
         }
+        copyImagesCards = imagesCards.map(function (elemento) { return elemento });
     }
 
     function returnDifferentsRandomNumbers(minNumber, maxNumber) {
@@ -87,12 +88,16 @@
     };
 
     async function populatingCards(levelCards) {
+        elementsPlayingLevel = levelCards;
         let levelLength = levelCards.length;
-        // console.log(levelLength);
         let temp = returnDifferentsRandomNumbers(0, levelLength);
         for (let i = 0; i < levelLength; i += 2) {
             levelCards[temp[i]].style.backgroundImage = imagesCards[0];
+            levelCards[temp[i]].style.backgroundSize = '0';
+            levelCards[temp[i]].style.cursor = 'pointer';
             levelCards[temp[i + 1]].style.backgroundImage = imagesCards[0];
+            levelCards[temp[i + 1]].style.backgroundSize = '0';
+            levelCards[temp[i + 1]].style.cursor = 'pointer';
             imagesCards.shift();
             levelCards[i].addEventListener('click', yourChance);
             levelCards[i + 1].addEventListener('click', yourChance);
@@ -100,10 +105,9 @@
     };
 
     async function cleaningCards(){
-        console.log(imagesCards);
-        for(let i = 0;i<(imagesCards.length * 2);i++){
-            imagesCards[i].style.backgroundImage = 'none';
-            imagesCards[i].removeEventListener('click', yourChance);
+        for (let i = 0; i < (elementsPlayingLevel.length);i++){
+            elementsPlayingLevel[i].style.backgroundImage = 'none';
+            elementsPlayingLevel[i].removeEventListener('click', yourChance);
         }
     }
 
@@ -128,10 +132,11 @@
         if (cardsSelected[0] === undefined) {
             cardsSelected[0] = document.getElementById(elementId);
             cardsSelected[0].style.backgroundSize = settingImageSize();
+            console.log(cardsSelected[0].id)
         }
         else {
-            // showProtection(); /// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
             cardsSelected[1] = document.getElementById(elementId);
+       
             sameClick()
         }
     };
@@ -177,11 +182,6 @@
         }
     }
 
-
-    // 	function reiniciarJogo() {
-    // 		document.location.reload();
-    // 	};
-
     function sameClick() {
         if (cardsSelected[0] === cardsSelected[1]) {
             showMessage('Clique em outro card', 1000);
@@ -189,6 +189,7 @@
         else{
             cardsSelected[1].style.backgroundSize = settingImageSize();
             showProtection();
+            console.log(cardsSelected[0].style.backgroundImage + '===' + cardsSelected[1].style.backgroundImage);
             setTimeout(imagesEquals, 1000);
         }
     }
@@ -201,6 +202,7 @@
     function showTheEnd(){
         elementsHtml.panels.style.display = 'flex';
         elementsHtml.theEnd.style.display = 'flex';
+        elementsHtml.leave.style.display = 'none';
     }
 
     function hidePanels(panel){
@@ -224,8 +226,8 @@
     }
 
     async function resetGame(){
-        console.log(imagesCards);
         await cleaningCards();
+        elementsHtml.board.setAttribute('class', '')
         playingLevel = '';
         points = 0;
         pointsLevel = 0;
@@ -234,6 +236,18 @@
         hidePanels(elementsHtml.theEnd);
         hideBoards();
         showOptions();
+    }
+
+    async function resetLevel(){
+        await cleaningCards();
+        points = 0;
+        pointsLevel = elementsPlayingLevel.length / 2;
+        cardsSelected = [undefined, undefined];
+        imagesCards = copyImagesCards.map(function(elemento){return elemento});
+        console.log(imagesCards);
+        hidePanels(elementsHtml.theEnd);
+        await populatingCards(elementsPlayingLevel);
+        elementsHtml.leave.style.display = 'block';
     }
 
     function playEasy(){
