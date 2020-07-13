@@ -12,3 +12,18 @@ Splash - 99
 protection - 98
 panel - 97
 game - 96
+
+--------------------------------------------------------------------------------
+
+showBoard() fechar apenas o showBoard
+
+criar 
+
+showLevelBoard()
+
+hideAllBoards()
+
+subsitituir hideBoardMinimal por hideAllBoards
+
+definir no css class para setup level boards e para o 
+proprio boards

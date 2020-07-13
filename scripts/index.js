@@ -29,11 +29,7 @@
     let splashVisible = false;
     let points = 0;
     let playingLevel = '';
-    let pointsLevel = {
-        easy: 0,
-        normal: 0,
-        hard: 0
-    };
+    let pointsLevel = 0;
     let cardsSelected = [undefined, undefined];
     let imagesCards = [];
 
@@ -47,11 +43,9 @@
     
     elementsHtml.leave.addEventListener('click', resetGame);
 
-    // 	elementsHtml.facil.addEventListener('click', easy);
-
-    // 	elementsHtml.reiniciar.addEventListener('click', reiniciarJogo);
-
-    // 	elementsHtml.iniciar.addEventListener('click', reiniciarJogo);
+    elementsHtml.start.addEventListener('click', resetGame);
+    
+    elementsHtml.restart.addEventListener('click', resetGame);
 
     // 	elementsHtml.msgs.addEventListener('click', hideMsgs);
 
@@ -98,119 +92,111 @@
         let temp = returnDifferentsRandomNumbers(0, levelLength);
         for (let i = 0; i < levelLength; i += 2) {
             levelCards[temp[i]].style.backgroundImage = imagesCards[0];
-            levelCards[temp[i]].style.backgroundSize = '80%';
-            levelCards[temp[i]].style.backgroundRepeat = 'no-repeat';
-            levelCards[temp[i]].style.backgroundPosition = 'center';
             levelCards[temp[i + 1]].style.backgroundImage = imagesCards[0];
-            levelCards[temp[i + 1]].style.backgroundSize = '80%';
-            levelCards[temp[i + 1]].style.backgroundRepeat = 'no-repeat';
-            levelCards[temp[i + 1]].style.backgroundPosition = 'center';
             imagesCards.shift();
-            // levelCards[i].addEventListener('click', yourChance);
-            // levelCards[i + 1].addEventListener('click', yourChance);
+            levelCards[i].addEventListener('click', yourChance);
+            levelCards[i + 1].addEventListener('click', yourChance);
         };
     };
 
-    // 	function hideModal() {
-    // 		elementsHtml.protection.style.width = '0%';
-    // 		elementsHtml.protection.style.height = '0%';
-    // 	}
-    // 	function showModal() {
-    // 		elementsHtml.protection.style.width = '100%';
-    // 		elementsHtml.protection.style.height = '100%';
-    // 	}
+    function settingImageSize(){
+        switch (playingLevel) {
+            case 'easy':
+                return 'var(--sizeImagesEasy)';
+            break;
+            case 'normal':
+                return 'var(--sizeImagesNormal)';
+            break;
+            case 'hard':
+                return 'var(--sizeImagesHard)';
+            break;        
+            default:
+                showMessage('Error in image size',1000);
+            break;
+        }
+    }
 
-    // 	function getCardSelected(elementId) {
-    // 		if (cardsSelected[0] === undefined) {
-    // 			cardsSelected[0] = document.getElementById(elementId);
-    // 			cardsSelected[0].style.backgroundSize = '80%';
-    // 		}
-    // 		else {
-    // 			showModal();
-    // 			cardsSelected[1] = document.getElementById(elementId);
-    // 			sameClick()
-    // 		}
-    // 	};
+    function getCardSelected(elementId) {
+        if (cardsSelected[0] === undefined) {
+            cardsSelected[0] = document.getElementById(elementId);
+            cardsSelected[0].style.backgroundSize = settingImageSize();
+        }
+        else {
+            // showProtection(); /// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+            cardsSelected[1] = document.getElementById(elementId);
+            sameClick()
+        }
+    };
 
-    // 	function cardsHide() {
-    // 		cardsSelected[0].style.backgroundSize = '0%';
-    // 		cardsSelected[1].style.backgroundSize = '0%';
-    // 	}
+    function cardsHide() {
+        cardsSelected[0].style.backgroundSize = '0%';
+        cardsSelected[1].style.backgroundSize = '0%';
+    }
 
-    // 	function cardsSelectedReset() {
-    // 		cardsSelected[0] = undefined;
-    // 		cardsSelected[1] = undefined;
-    // 		console.log('cardSelected reseted');
-    // 	}
+    function cardsSelectedReset() {
+        cardsSelected[0] = undefined;
+        cardsSelected[1] = undefined;
+        console.log('cardSelected reseted');
+    }
 
-    // 	function removeClickCard() {
-    // 		cardsSelected[0].removeEventListener('click', yourChance);
-    // 		cardsSelected[1].removeEventListener('click', yourChance);
-    // 	}
+    function removeClickCard() {
+        cardsSelected[0].removeEventListener('click', yourChance);
+        cardsSelected[1].removeEventListener('click', yourChance);
+    }
 
-    // 	function yourChance() {
-    // 		getCardSelected(event.currentTarget.id);
-    // 	}
+    function yourChance() {
+        getCardSelected(event.currentTarget.id);
+    }
 
-    // 	function imagesEquals() {
-    // 		if (cardsSelected[0].style.backgroundImage === cardsSelected[1].style.backgroundImage) {
-    // 			console.log('Cards Iguais');
-    // 			pontos++;
-    // 			if (pontos >= 6) {
-    // 				theEnd();
-    // 			}
-    // 			removeClickCard();
-    // 			cardsSelectedReset();
-    // 			hideModal();
-    // 		}
-    // 		else {
-    // 			console.log('Cards diferentes');
-    // 			cardsHide();
-    // 			cardsSelectedReset();
-    // 			hideModal();
-    // 		}
-    // 	}
+    function imagesEquals() {
+        if (cardsSelected[0].style.backgroundImage === cardsSelected[1].style.backgroundImage) {
+            console.log('Cards Iguais');
+            points++;
+            if (points >= pointsLevel) {
+                theEnd();
+            }
+            removeClickCard();
+            cardsSelected[0].style.cursor = 'none';
+            cardsSelected[1].style.cursor = 'none';
+            cardsSelectedReset();
+            hideProtection();
+        }
+        else {
+            console.log('Cards diferentes');
+            cardsHide();
+            cardsSelectedReset();
+            hideProtection();
+        }
+    }
 
-    // 	function theEnd() {
-    // 		showModal();
-    // 		elementsHtml.opcoes.style.display = 'flex';
-    // 		elementsHtml.fim.style.display = 'flex';
-    // 	};
+    	function theEnd() {
+            showTheEnd(elementsHtml.theEnd);
+    	};
 
-    // 	function easy() {
-    // 		populatingCards();
-    // 		elementsHtml.dificuldade.style.display = 'none';
-    // 		elementsHtml.opcoes.style.display = 'none';
-    // 	};
 
     // 	function reiniciarJogo() {
     // 		document.location.reload();
     // 	};
 
-    // 	function sameClick() {
-    // 		if (cardsSelected[0] === cardsSelected[1]) {
-    // 			elementsHtml.protection.style.zIndex = 99;
-    // 			showModal();
-    // 			elementsHtml.msgs.style.display = 'flex';
-    // 			elementsHtml.sameCard.style.display = 'flex';
-    // 		}
-    // 		else{
-    // 			cardsSelected[1].style.backgroundSize = '80%';
-    // 			setTimeout(imagesEquals, 1000);
-    // 		}
-    // 	}
+    function sameClick() {
+        if (cardsSelected[0] === cardsSelected[1]) {
+            showMessage('Clique em outro card', 1000);
+        }
+        else{
+            cardsSelected[1].style.backgroundSize = settingImageSize();
+            showProtection();
+            setTimeout(imagesEquals, 1000);
+        }
+    }
 
-    // 	function hideMsgs(){
-    // 		elementsHtml.protection.style.zIndex = 97;
-    // 		hideModal();
-    // 		elementsHtml.msgs.style.display = 'none';
-    // 		elementsHtml.sameCard.style.display = 'none';
-    // 	}
-
-    function showPanels(panel){
+    function showOptions(panel){
         elementsHtml.panels.style.display = 'flex';
         panel.style.display = 'block';
-
+    }
+    
+    function showTheEnd(panel){
+        elementsHtml.panels.style.display = 'flex';
+        panel.style.display = 'flex';
     }
 
     function hidePanels(panel){
@@ -225,37 +211,37 @@
 
     }
 
-    function hideBoard(level){
-        elementsHtml.leave.style.display = 'none';
-        elementsHtml.board.style.display = 'none';
-        hideBoardMinimal(level);
-    }
+    // function hideBoard(level){
+    //     elementsHtml.leave.style.display = 'none';
+    //     elementsHtml.board.style.display = 'none';
+    //     hideBoardMinimal(level);
+    // }
 
     function hideBoardMinimal(level){
         level.style.display = 'none';
     }
 
     function resetGame(){
-        playingLevel = '';
-        points = 0;
-        pointsLevel.easy = 0;
-        pointsLevel.normal = 0;
-        pointsLevel.hard = 0;
-        elementsHtml.leave.style.display = 'none';
-        elementsHtml.board.style.display = 'none';
-        hideBoardMinimal(elementsHtml.easy);
-        hideBoardMinimal(elementsHtml.normal);
-        hideBoardMinimal(elementsHtml.hard);
-        cardsSelected = [undefined, undefined];
-        imagesCards = [];
-        showPanels(elementsHtml.options);
+        document.location.reload();
+        // playingLevel = '';
+        // points = 0;
+        // pointsLevel = 0;
+        // elementsHtml.leave.style.display = 'none';
+        // elementsHtml.board.style.display = 'none';
+        // hideBoardMinimal(elementsHtml.easy);
+        // hideBoardMinimal(elementsHtml.normal);
+        // hideBoardMinimal(elementsHtml.hard);
+        // cardsSelected = [undefined, undefined];
+        // imagesCards = [];
+        // hidePanels(elementsHtml.theEnd);
+        // showOptions(elementsHtml.options);
     }
 
     function playEasy(){
         playingLevel = 'easy';
-        // console.log(playingLevel);
+        pointsLevel = elementsHtml.easyCards.length / 2;
         fetchImages(playingLevel);
-        // console.log(imagesCards);
+        elementsHtml.board.setAttribute('class', 'boardEasy')
         populatingCards(elementsHtml.easyCards);
         hidePanels(elementsHtml.options);
         showBoard(elementsHtml.easy);
@@ -263,10 +249,9 @@
     
     function playNormal(){
         playingLevel = 'normal';
-        // console.log(playingLevel);
+        pointsLevel = elementsHtml.normalCards.length / 2;
         fetchImages(playingLevel);
-        // console.log(imagesCards);
-        // console.log(elementsHtml.normalCards.length);
+        elementsHtml.board.setAttribute('class', 'boardNormal')
         populatingCards(elementsHtml.normalCards);
         hidePanels(elementsHtml.options);
         showBoard(elementsHtml.normal);
@@ -274,12 +259,9 @@
 
     function playHard() {
         playingLevel = 'hard';
-        // console.log(playingLevel);
+        pointsLevel = elementsHtml.hardCards.length / 2;
         fetchImages(playingLevel);
-        // console.log(imagesCards);
-        // console.log(elementsHtml.hardCards.length);
-        elementsHtml.board.style.width = 'var(--widthBoardHard)';
-        elementsHtml.board.style.height = 'var(--heighBoardHard';
+        elementsHtml.board.setAttribute('class', 'boardHard')
         populatingCards(elementsHtml.hardCards);
         hidePanels(elementsHtml.options);
         showBoard(elementsHtml.hard);
@@ -300,16 +282,16 @@
     function hideSplash() {
         elementsHtml.splash.style.display = 'none';
         splashVisible = false;
-        showPanels(elementsHtml.options);
+        showOptions(elementsHtml.options);
         elementsHtml.header.style.display = 'block';
         elementsHtml.main.style.display = 'flex';
     };
 
-    function showMessage(msg){
+    function showMessage(msg, time){
         showProtection();
         elementsHtml.message.textContent = msg;
         elementsHtml.msgs.style.display = 'block';
-        setTimeout(hideMessage, 1000);
+        setTimeout(hideMessage, time);
     }
 
     function hideMessage() {
@@ -320,7 +302,7 @@
 
     function whileSplashVisible(){
         if (elementsHtml.splash.style.display === 'block'){
-            showMessage('Clique no dragão!');
+            showMessage('Clique no dragão!', 1000);
         }else{
             splashVisible = false;
         }
